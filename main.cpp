@@ -44,6 +44,14 @@ vector<Token> tokenize(const string& line) {
             }
         }
     }
+
+    if (!numbers.empty())
+    {
+        Token c;
+        c.value = numbers;
+        tokens.push_back(c);
+    }
+
     return tokens;
 }
 
