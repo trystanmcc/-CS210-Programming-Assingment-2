@@ -94,6 +94,46 @@ bool isValidPostfix(const vector<Token>& tokens) {
 
 bool isValidInfix(const vector<Token>& tokens) {
     // TODO
+    int change = 0;
+    int count = 0;
+    bool cont = true;
+
+    for (int i=0; i<tokens.size(); i++)
+    {
+        if (tokens[i].value == "(")
+        {
+            count++;
+            cont = false;
+        }
+
+        if (tokens[i].value == ")")
+        {
+            count--;
+        }
+
+        if (cont == true)
+        {
+            if (change == 0)
+            {
+                if (isOperator(tokens[i].value))
+                {
+                    return false;
+                }
+                change++;
+            } else if (change == 1)
+            {
+                if (!isOperator(tokens[i].value))
+                {
+                    return false;
+                }
+                change--;
+            }
+        }
+        cont = true;
+    }
+
+    if (count == 0 && change == 1)
+        return true;
     return false;
 }
 
