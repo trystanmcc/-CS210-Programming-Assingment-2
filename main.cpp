@@ -81,7 +81,11 @@ bool isValidPostfix(const vector<Token>& tokens) {
         if (tokens[i].value == "(" || tokens[i].value == ")")
             return false;
         if (isOperator(tokens[i].value))
+        {
             count--;
+            if (count < 1)
+                return false;
+        }
         else
             count++;
     }
@@ -175,7 +179,7 @@ vector<Token> infixToPostfix(const vector<Token>& tokens) {
 
     }
 
-    while (!stack.empty())
+    while (!stack.empty() && stack.top().value != "(")
     {
         output.push_back(stack.top());
         stack.pop();
