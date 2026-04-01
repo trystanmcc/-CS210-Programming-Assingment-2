@@ -31,12 +31,16 @@ vector<Token> tokenize(const string& line) {
         {
             if (!numbers.empty())
             {
-                tokens.push_back({numbers});
+                Token a;
+                a.value = numbers;
+                tokens.push_back(a);
                 numbers = "";
             }
             if (line[i] == '(' || line[i] == ')' || line[i] == '+' || line[i] == '-' || line[i] == '*' || line[i] == '/')
             {
-                tokens.push_back({line[i]});
+                Token b;
+                b.value = string(1, line[i]);
+                tokens.push_back(b);
             }
         }
     }
