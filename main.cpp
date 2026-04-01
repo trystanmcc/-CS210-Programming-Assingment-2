@@ -74,6 +74,21 @@ int precedence(const string& op) {
 
 bool isValidPostfix(const vector<Token>& tokens) {
     // TODO
+    int count = 0;
+
+    for (int i=0; i<tokens.size(); i++)
+    {
+        if (tokens[i].value == "(" || tokens[i].value == ")")
+            return false;
+        if (isOperator(tokens[i].value))
+            count--;
+        else
+            count++;
+    }
+
+    if (count == 1)
+        return true;
+
     return false;
 }
 
