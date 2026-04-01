@@ -63,7 +63,7 @@ bool isOperator(const string& s) {
 
 int precedence(const string& op) {
     // TODO
-    if (op == "+" || op == "-")
+    if (op == "*" || op == "/")
         return 2;
     if (op == "+" || op == "-")
         return 1;
@@ -189,7 +189,29 @@ vector<Token> infixToPostfix(const vector<Token>& tokens) {
 double evalPostfix(const vector<Token>& tokens) {
     ArrayStack<double> stack;
     // TODO
-    return 0.0;
+    for (int i=0; i<tokens.size(); i++)
+    {
+        if (isOperator(tokens[i].value))
+        {
+            double b = stack.top(); stack.pop();
+            double a = stack.top(); stack.pop();
+
+            if (tokens[i].value == "+")
+                stack.push(a + b);
+            else if (tokens[i].value == "-")
+                stack.push(a - b);
+            else if (tokens[i].value == "*")
+                stack.push(a * b);
+            else if (tokens[i].value == "/")
+                stack.push(a / b);
+        }
+        else
+        {
+            stack.push(stod(tokens[i].value));
+        }
+    }
+
+    return stack.top();
 }
 
 // Main
